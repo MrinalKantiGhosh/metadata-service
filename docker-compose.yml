@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+  db:
+    image: mongo:3.4-xenial
+    environment:
+      - DATABASE_USERNAME=${DB_USERNAME}
+      - DATABASE_PASSWORD=${DB_PASSWORD}
+    volumes:
+    - /tmp/metadata-database:/data/db:ro
+    env_file:
+      - .env
+    healthcheck:
+      test: echo "db.runCommand('ping').ok" | mongo localhost:27017/metadata
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  api:
+    build:
+      dockerfile: Dockerfile.metadata-service
+      context: .
+    depends_on:
+      - db
+    ports:
+    - ${SERVER_PORT}:${SERVER_PORT}
+    env_file:
+      - .env
+    healthcheck:
+      test: curl -f localhost:8080/metadata
+      timeout: 5s
+      interval: 10s
+      retries: 4

@@ -1,0 +1,18 @@
+FROM maven:3-jdk-8 AS builder
+WORKDIR /metadata-service
+COPY . .
+RUN mvn clean package
+
+
+FROM openjdk:8-alpine3.9
+
+RUN apk add --no-cache bash && \
+    mkdir /metadata-service && \
+    adduser -h /metadata-service -s /bin/sh -u 1001 -D metadata-service && \
+    chown -R metadata-service:metadata-service /metadata-service
+WORKDIR /metadata-service
+COPY --from=builder /metadata-service/target/metadata-service.jar .
+USER 1001
+EXPOSE $SERVER_PORT
+CMD java -jar metadata-service.jar --server.port=${SERVER_PORT}
+
