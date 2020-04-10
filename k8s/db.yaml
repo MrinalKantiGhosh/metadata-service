@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: metadata-service-db
-          image: mongo:3.4-xenial
+          image: mongo:3.6
           imagePullPolicy: IfNotPresent
           env:
             - name: DATABASE_USERNAME
