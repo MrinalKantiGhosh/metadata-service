@@ -14,12 +14,12 @@ _deploy_db() {
 }
 
 _deploy_api() {
-  kubects apply -f k8s/api.yaml
+  kubectl apply -f k8s/api.yaml
 }
 
 __deploy() {
   _deploy_db
-  wait 10s
+  sleep 10s
   _deploy_api
 }
 

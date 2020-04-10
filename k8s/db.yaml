@@ -34,7 +34,7 @@ spec:
   selector:
     app: metadata-service-db
   ports:
-    - name: DB-PORT-27017
+    - name: "db-port-27017"
       protocol: TCP
       port: 27017
       targetPort: 27017
