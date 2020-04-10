@@ -20,9 +20,15 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: SERVER_PORT
-              value: "8080"
+              valueFrom:
+                - configMapKeyRef:
+                    name: api-config
+                    key: SERVER_PORT
             - name: DB_URI
-              value: "mongodb://metadata-service-db:27017/metadata"
+              valueFrom:
+                - configMapKeyRef:
+                    name: api-config
+                    key: DB_URI
           ports:
             - containerPort: 8080
 ---

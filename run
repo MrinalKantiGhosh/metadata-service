@@ -17,14 +17,19 @@ _deploy_api() {
   kubectl apply -f k8s/api.yaml
 }
 
+_create_config() {
+  kubectl create configmap api-config --from-file=api.env
+}
+
 __deploy() {
-  _push_secrets
+  _create_config
+  _create_secrets
   _deploy_db
   sleep 10s
   _deploy_api
 }
 
-_push_secrets() {
+_create_secrets() {
   kubectl apply -f k8s/secrets.yml
 }
 

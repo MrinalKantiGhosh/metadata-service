@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  db:
+  metadata-service-db:
     image: mongo:3.4-xenial
     environment:
       - DATABASE_USERNAME=${DB_USERNAME}
