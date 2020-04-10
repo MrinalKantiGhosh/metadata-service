@@ -1,13 +1,26 @@
 # Metadata Service 
 
-1) POST to create an entry in the database
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"group":"sunitparekh","name":"city","value":"Pune"}' \
-  http://localhost:8080/metadata
+## local-deployment
+1. Build the image ```./run build```
+2. ```docker-compose up```
+3. Go to Check the Service Section and follow step 2 and 3. Replace `metadata-service-api` with `localhost`
 
-2) GET an entry posted in step 1
-curl http://localhost:8080/metadata/<id-received-in-post-response>
+## kubernetes-deployment
+1. Make sure minikube is up and running
+2. Build the image ```./run build```
+3. ```./run deploy```
+
+
+## Check the service
+1. ```kubectl run curl --image appropriate/curl --restart Never -it --command -- /bin/sh```
+
+2. POST to create an entry in the database \
+```curl --header "Content-Type: application/json" --request POST --data '{"group":"Thoughtworks India","name":"Mrinal","value":"Gurgaon"}' http://metadata-service-api:8080/metadata```
+
+3. GET an entry posted in step 2 \
+```curl http://metadata-service-api:8080/metadata/<id-received-in-post-response>```
+
+
 
 
 
