@@ -20,9 +20,15 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: DATABASE_USERNAME
-              value: "metadata-service"
+              valueFrom:
+                secretKeyRef:
+                  name: metadata-service-secrets
+                  key: database_username
             - name: DATABASE_PASSWORD
-              value: "rotc"
+              valueFrom:
+                secretKeyRef:
+                  name: metadata-service-secrets
+                  key: database_password
           ports:
             - containerPort: 27017
 ---

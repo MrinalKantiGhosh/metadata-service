@@ -18,9 +18,14 @@ _deploy_api() {
 }
 
 __deploy() {
+  _push_secrets
   _deploy_db
   sleep 10s
   _deploy_api
+}
+
+_push_secrets() {
+  kubectl apply -f k8s/secrets.yml
 }
 
 usage_message="Usage $0 <command>\nCommands:"
