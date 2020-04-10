@@ -1,0 +1,34 @@
+#!/bin/bash
+
+_export_envs() {
+  export SERVER_PORT=8080
+}
+
+__build() {
+  _export_envs
+  docker build --build-arg="SERVER PORT=\"${SERVER_PORT}\"" -f Dockerfile.metadata-service -t mrinal2196/metadata-service .
+}
+
+_deploy_db() {
+  kubectl apply -f k8s/db.yml
+}
+
+_deploy_api() {
+  kubects apply -f k8s/api.yml
+}
+
+__deploy() {
+  _deploy_db
+  wait 10s
+  _deploy_api
+}
+
+usage_message="Usage $0 <command>\nCommands:"
+
+CMD=${1:-}
+shift || true
+if __${CMD} "$@"; then ## Functions to be called as commands are prefixed with __
+  exit 0
+else
+  echo -e "$usage_message\n$(declare -F | sed -n "s/declare -f __/ - /p")"
+fi
