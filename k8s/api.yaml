@@ -21,12 +21,12 @@ spec:
           env:
             - name: SERVER_PORT
               valueFrom:
-                - configMapKeyRef:
+                configMapKeyRef:
                     name: api-config
                     key: SERVER_PORT
             - name: DB_URI
               valueFrom:
-                - configMapKeyRef:
+                configMapKeyRef:
                     name: api-config
                     key: DB_URI
           ports:
