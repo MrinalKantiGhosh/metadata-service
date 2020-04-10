@@ -10,11 +10,11 @@ __build() {
 }
 
 _deploy_db() {
-  kubectl apply -f k8s/db.yml
+  kubectl apply -f k8s/db.yaml
 }
 
 _deploy_api() {
-  kubects apply -f k8s/api.yml
+  kubects apply -f k8s/api.yaml
 }
 
 __deploy() {
