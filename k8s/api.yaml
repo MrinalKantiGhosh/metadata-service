@@ -17,7 +17,7 @@ spec:
       containers:
         - name: metadata-service-api
           image: mrinal2196/metadata-service:latest
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           env:
             - name: SERVER_PORT
               value: "8080"

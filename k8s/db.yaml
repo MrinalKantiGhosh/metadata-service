@@ -17,7 +17,7 @@ spec:
       containers:
         - name: metadata-service-db
           image: mongo:3.6
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Never
           env:
             - name: DATABASE_USERNAME
               valueFrom:
