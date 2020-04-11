@@ -7,7 +7,7 @@ RUN mvn clean package -DskipTests
 
 
 FROM openjdk:8-alpine3.9
-ARG SERVER_PORT
+ARG SERVER_PORT=8080
 ENV SERVER_PORT=${SERVER_PORT}
 RUN apk add --no-cache bash && \
     mkdir /metadata-service && \

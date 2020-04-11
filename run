@@ -6,7 +6,7 @@ _export_envs() {
 
 __build() {
   _export_envs
-  docker build --build-arg="SERVER PORT=\"${SERVER_PORT}\"" -f Dockerfile.metadata-service -t metadata-service .
+  docker build --build-arg="SERVER_PORT=${SERVER_PORT}" -f Dockerfile.metadata-service -t metadata-service .
 }
 
 _deploy_db() {
