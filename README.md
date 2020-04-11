@@ -31,3 +31,13 @@ comment @Configuration on line # 8
 2) src/main/resources/application.properties
 comment out line 24 
 uncomment line 25 (remember the name of the mongodb server or change it as you like)
+
+
+
+# check mongo database
+Use these commands after entering into mongo shell
+
+1.See all your databases: `show dbs` \
+2: Select the database: `use your_database_name` \
+3: Show the collections: `show collections` \
+4: See all the data: `db.collection_name.find()` or `db.collection_name.find().pretty()`
