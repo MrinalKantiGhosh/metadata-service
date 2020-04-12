@@ -20,7 +20,11 @@ _deploy_api() {
 __deploy() {
   _create_secrets
   _deploy_db
-  sleep 10s
+  while [[ $(kubectl get pods $(kubectl describe pod -l='app=metadata-service-db' | grep Name | awk '{print $2}' | head -1) -o jsonpath='{.status.phase}') != "Running" ]]
+  do
+    echo "Waiting for Mongo ............"
+    sleep 1s
+  done
   _deploy_api
 }
 
